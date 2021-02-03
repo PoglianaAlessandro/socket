@@ -21,7 +21,7 @@ sock_service.connect((SERVER_ADDRESS, SERVER_PORT))
 
 print("Connesso a " + str((SERVER_ADDRESS, SERVER_PORT)))
 while True:
-    try:
+    try: 
         dati = input("Inserisci i dati da inviare (0 per terminare la connessione): ")
     except EOFError:
         print("\nOkay. Exit")
