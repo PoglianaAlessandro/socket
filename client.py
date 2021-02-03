@@ -21,23 +21,23 @@ sock_service.connect((SERVER_ADDRESS, SERVER_PORT))
 
 print("Connesso a " + str((SERVER_ADDRESS, SERVER_PORT)))
 while True:
-    try:
-        dati = input("Inserisci i dati da inviare (0 per terminare la connessione): ")
-    except EOFError:
-        print("\nOkay. Exit")
-        break
-    if not dati:
-        print("Non puoi inviare una stringa vuota!")
-        continue
-    if dati == '0':
-        print("Chiudo la connessione con il server!")
-        break
+    try: #try per evitare vari possibili errori
+        dati = input("Inserisci i dati da inviare (ko per terminare la connessione): ")#inserimento dati in caso non trova errori
+    except EOFError: #se c'è un errore
+        print("\nOkay. Exit")# stampa questo 
+        break #chiusura
+    if not dati:# se non vengono insierriti dati 
+        print("Non puoi inviare una stringa vuota!")# meaasggio
+        continue# non chiude il ciclo ma lo continua comunque
+    if dati == 'ko':#se viene inserito ko
+        print("Chiudo la connessione con il server!")#il server si chiude
+        break#chiusura
     
-    dati = dati.encode()
+    dati = dati.encode() #.encode trasforma la stringa in byte
 
-    sock_service.send(dati)
+    sock_service.send(dati) #.send inivia a dati 
 
-    dati = sock_service.recv(2048)
+    dati = sock_service.recv(2048) #.recv riceve i dati
 
     if not dati:
         print("Server non risponde. Exit")

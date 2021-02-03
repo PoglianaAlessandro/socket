@@ -1,3 +1,4 @@
+  
 #!/usr/bin/env python3
 import socket
 
@@ -26,16 +27,27 @@ while True:
     while True:
         dati = sock_service.recv(2048)
         contConn+=1
-        if not dati:
+        if not dati:#se non riceve dati chiude la connessione
             print("Fine dati dal client. Reset")
             break
         
         dati = dati.decode()
         print("Ricevuto: '%s'" % dati)
-        if dati=='0':
+        if dati=='ko':#se riceve ko chiude la connessione
             print("Chiudo la connessione con " + str(addr_client))
             break
-        dati = "Risposta a : " + str(addr_client) + ". Il valore del contatore è : " + str(contConn)
+        operazione, primo, secondo = dati.split(";")#.split
+        #Vari if per selezionare l'operazione che il client ha inserito
+        if operazione == "piu":
+            risultato = int(primo) + int(secondo)
+        if operazione == "meno":
+            risultato = int(primo) - int(secondo)
+        if operazione == "per":
+            risultato = int(primo) * int(secondo)
+        if operazione == "diviso":
+            risultato = int(primo) / int(secondo)
+
+        dati = "Il risultato dell'operazione: "+operazione +" tra "+primo+" e "+secondo+" è: "+str(risultato)#output
 
         dati = dati.encode()
 
