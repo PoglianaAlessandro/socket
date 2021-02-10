@@ -35,12 +35,17 @@ def ricevi_comandi(sock_listen):
             if operazione == "per":
                 risultato = int(primo) * int(secondo)
             if operazione == "diviso":
-                risultato = int(primo) / int(secondo)
+                if int(secondo)==0:
+                    print("Impossibile")
+                    break
+                else:
+                    risultato = int(primo) / int(secondo)
             
             dati = "Il risultato dell'operazione: "+operazione +" tra "+primo+" e "+secondo+" è: "+str(risultato)#output
             dati = dati.encode()
             sock_service.send(dati)
-        sock_service.close()
+    sock_service.close()
+   
 
 def avvia_server(address, port):
     sock_listen = socket.socket()

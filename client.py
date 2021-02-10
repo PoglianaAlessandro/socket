@@ -43,6 +43,7 @@ def invia_comandi(sock_service):
 
         print("Ricevuto dal server:")
         print(dati + '\n')
+    
     sock_service.close()
         
 
@@ -58,4 +59,5 @@ def connessione_server(address, port):
 #programma per usare le sue funzioni o classi
 if __name__ == '__main__':
     connessione_server(SERVER_ADDRESS, SERVER_PORT)
+
 
